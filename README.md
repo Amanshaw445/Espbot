@@ -1,52 +1,72 @@
-📦 What You Got:
-1️⃣ ESP32_VoiceBot.ino - Complete Arduino Code
+<h1>ESP32 VoiceBot</h1>
 
-Records 3 seconds of audio from I2S microphone
-Sends to Google Speech-to-Text API
-Gets AI response from OpenAI
-Converts response to speech via Google TTS
-Plays audio through I2S amplifier
+<p>A smart voice assistant using ESP32 that can <strong>record audio</strong>, <strong>transcribe it</strong>, <strong>get AI responses</strong>, and <strong>speak back</strong> in real-time!</p>
 
-2️⃣ ESP32_WIRING_GUIDE.md - Detailed Setup Guide
+<h2>📦 What’s Included</h2>
+<ul>
+  <li><strong>ESP32_VoiceBot.ino</strong> – Complete Arduino code
+    <ul>
+      <li>Records 3 seconds of audio from I2S microphone</li>
+      <li>Sends audio to <strong>Google Speech-to-Text API</strong></li>
+      <li>Retrieves AI response from <strong>OpenAI</strong></li>
+      <li>Converts AI response to speech via <strong>Google TTS</strong></li>
+      <li>Plays audio through <strong>I2S amplifier</strong></li>
+    </ul>
+  </li>
+  <li><strong>ESP32_WIRING_GUIDE.md</strong> – Detailed Setup Guide
+    <ul>
+      <li>Complete parts list</li>
+      <li>Step-by-step wiring instructions</li>
+      <li>Library installation guide</li>
+      <li>Troubleshooting tips</li>
+      <li>Power consumption info</li>
+    </ul>
+  </li>
+  <li><strong>ESP32_WIRING_DIAGRAM.txt</strong> – Visual Wiring Diagram
+    <ul>
+      <li>ASCII art wiring diagram for easy reference</li>
+      <li>Quick pin summary</li>
+      <li>Color coding suggestions</li>
+    </ul>
+  </li>
+</ul>
 
-Complete parts list
-Step-by-step wiring instructions
-Library installation guide
-Troubleshooting tips
-Power consumption info
+<h2>🔌 Quick Pin Reference</h2>
 
-3️⃣ ESP32_WIRING_DIAGRAM.txt - Visual Wiring Diagram
+<h3>INMP441 Microphone</h3>
+<table>
+  <tr><th>Pin</th><th>Connects To</th></tr>
+  <tr><td>VDD</td><td>3.3V</td></tr>
+  <tr><td>GND</td><td>GND</td></tr>
+  <tr><td>SD</td><td>GPIO 32</td></tr>
+  <tr><td>WS</td><td>GPIO 25</td></tr>
+  <tr><td>SCK</td><td>GPIO 33</td></tr>
+  <tr><td>L/R</td><td>GND</td></tr>
+</table>
 
-ASCII art diagram for easy reference
-Quick pin summary
-Color coding suggestions
+<h3>MAX98357A Amplifier</h3>
+<table>
+  <tr><th>Pin</th><th>Connects To</th></tr>
+  <tr><td>VIN</td><td>5V</td></tr>
+  <tr><td>GND</td><td>GND</td></tr>
+  <tr><td>DIN</td><td>GPIO 26</td></tr>
+  <tr><td>BCLK</td><td>GPIO 27</td></tr>
+  <tr><td>LRC</td><td>GPIO 14</td></tr>
+  <tr><td>SD</td><td>3.3V (enable)</td></tr>
+  <tr><td>GAIN</td><td>GND (9dB)</td></tr>
+</table>
 
-🔌 Quick Pin Reference:
-INMP441 Microphone:
+<h3>Other Components</h3>
+<ul>
+  <li>Button: GPIO 15 → Button → GND</li>
+  <li>Speaker: Connect to AMP + and -</li>
+</ul>
 
-VDD → 3.3V
-GND → GND
-SD → GPIO 32
-WS → GPIO 25
-SCK → GPIO 33
-L/R → GND
-
-MAX98357A Amplifier:
-
-VIN → 5V
-GND → GND
-DIN → GPIO 26
-BCLK → GPIO 27
-LRC → GPIO 14
-SD → 3.3V (enable)
-GAIN → GND (9dB)
-
-Button: GPIO 15 → Button → GND
-Speaker: Connect to AMP + and -
-⚙️ Before Uploading:
-
-Install required libraries in Arduino IDE
-Add your WiFi credentials
-Add your API keys (Google Cloud + OpenAI)
-Select ESP32 board and correct COM port
-Upload!
+<h2>⚙️ Before Uploading</h2>
+<ol>
+  <li>Install required libraries in Arduino IDE</li>
+  <li>Add your WiFi credentials</li>
+  <li>Add your API keys (Google Cloud + OpenAI)</li>
+  <li>Select ESP32 board and correct COM port</li>
+  <li>Upload the code!</li>
+</ol>
