@@ -70,7 +70,7 @@ const char* openaiApiKey = "YOUR_OPENAI_API_KEY";
 
 // Recording settings
 #define SAMPLE_RATE 16000
-#define RECORD_TIME 3  // 3 seconds
+#define RECORD_TIME 6  // seconds if not works reduce to 3 sec
 #define SAMPLE_BUFFER_SIZE 512
 
 // Audio object for playback
