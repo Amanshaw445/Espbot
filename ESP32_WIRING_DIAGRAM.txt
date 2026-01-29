@@ -1,0 +1,113 @@
+ESP32 AI VOICE BOT - VISUAL WIRING DIAGRAM
+===========================================
+
+                                    ┌─────────────────────────┐
+                                    │   ESP32-WROOM-32       │
+                                    │                         │
+        ┌─────────────────────────► │ 3.3V                    │
+        │                           │                         │
+        │  ┌────────────────────────┤ GND  ◄──────────────────┼─────┐
+        │  │                        │                         │     │
+        │  │  ┌─────────────────────┤ GPIO 32  (I2S Data In) │     │
+        │  │  │                     │                         │     │
+        │  │  │  ┌──────────────────┤ GPIO 25  (I2S WS Mic)  │     │
+        │  │  │  │                  │                         │     │
+        │  │  │  │  ┌───────────────┤ GPIO 33  (I2S CLK Mic) │     │
+        │  │  │  │  │               │                         │     │
+        │  │  │  │  │               │                         │     │
+        │  │  │  │  │      ┌────────┤ GPIO 26  (I2S Data Out)│     │
+        │  │  │  │  │      │        │                         │     │
+        │  │  │  │  │      │  ┌─────┤ GPIO 27  (I2S BCLK Amp)│     │
+        │  │  │  │  │      │  │     │                         │     │
+        │  │  │  │  │      │  │  ┌──┤ GPIO 14  (I2S LRC Amp) │     │
+        │  │  │  │  │      │  │  │  │                         │     │
+        │  │  │  │  │      │  │  │  │ GPIO 15  (Button)  ◄───┼─┐   │
+        │  │  │  │  │      │  │  │  │                         │ │   │
+        │  │  │  │  │      │  │  │  │ 5V (VIN)          ◄────┼─┼───┼──┐
+        │  │  │  │  │      │  │  │  │                         │ │   │  │
+        │  │  │  │  │      │  │  │  └─────────────────────────┘ │   │  │
+        │  │  │  │  │      │  │  │                               │   │  │
+        │  │  │  │  │      │  │  │                               │   │  │
+     ┌──┴──┴──┴──┴──┴──┐   │  │  │    ┌──────────────────┐     │   │  │
+     │   INMP441 MIC   │   │  │  │    │   MAX98357A AMP  │     │   │  │
+     │   (I2S Input)   │   │  │  │    │  (I2S Output)    │     │   │  │
+     ├─────────────────┤   │  │  │    ├──────────────────┤     │   │  │
+     │ VDD  ──────────────┘  │  │     │ DIN  ────────────┼─────┘   │  │
+     │ GND  ─────────────────┼──┼─────┤ GND  ────────────┼─────────┘  │
+     │ SD   ──────────────────┘  │     │ BCLK ────────────┼────────────┘
+     │ WS   ─────────────────────┘     │ LRC  ────────────┼───────────┘
+     │ SCK  ────────────────────────┐  │ VIN  ────────────┼──────────┐
+     │ L/R  ──┐                     │  │ SD   ─────┐      │          │
+     └────────┼─────────────────────┘  │ GAIN ──┐  │      │          │
+              │                        └────────┼──┼──────┘          │
+              │                                 │  │                 │
+              └─────────────────────────────────┼──┼─────────────────┤
+                                                │  │                 │
+                                                │  └────► 3.3V       │
+                                                │                    │
+                                                └────► GND           │
+                                                                     │
+                                                                     │
+     ┌──────────────────┐                      ┌─────────────┐      │
+     │  PUSH BUTTON     │                      │  SPEAKER    │      │
+     │                  │                      │  4-8 Ohm    │      │
+     ├──────────────────┤                      ├─────────────┤      │
+     │ Pin 1 ────────────────► GPIO 15         │ (+) ────────┼──────┘
+     │ Pin 2 ─────────────────► GND            │ (-) ────────┼──┐
+     └──────────────────┘                      └─────────────┘  │
+                                                                 │
+                                                                 │
+     ┌──────────────────────────────────────────────────────────┘
+     │  Common Ground (GND)
+     │  Connect all GND pins together!
+     └──────────────────────────────────────────────────────────────
+
+
+PIN SUMMARY (Quick Reference):
+===============================
+
+MICROPHONE (INMP441):
+  VDD  → 3.3V
+  GND  → GND
+  SD   → GPIO 32
+  WS   → GPIO 25
+  SCK  → GPIO 33
+  L/R  → GND
+
+AMPLIFIER (MAX98357A):
+  VIN  → 5V
+  GND  → GND
+  DIN  → GPIO 26
+  BCLK → GPIO 27
+  LRC  → GPIO 14
+  SD   → 3.3V
+  GAIN → GND
+
+BUTTON:
+  Pin1 → GPIO 15
+  Pin2 → GND
+
+SPEAKER:
+  (+)  → AMP (+)
+  (-)  → AMP (-)
+
+
+IMPORTANT NOTES:
+================
+1. Use 2A power supply for stable operation
+2. Keep microphone wires < 15cm
+3. Connect SD pin on MAX98357A to 3.3V to enable amp
+4. L/R pin on INMP441 to GND selects left channel
+5. GAIN on GND = 9dB, Float = 15dB, VDD = 12dB
+6. All GND pins must be connected together (common ground)
+7. Button uses internal pull-up resistor (defined in code)
+
+
+COLOR CODING SUGGESTION:
+========================
+Red    = Power (3.3V, 5V)
+Black  = Ground (GND)
+Yellow = Data signals (SD, DIN)
+Green  = Clock signals (SCK, BCLK)
+Blue   = Word Select (WS, LRC)
+White  = Control (Button, SD enable)
